@@ -10,6 +10,7 @@ from langchain_community.chat_models import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAI
+from langchain_community.document_loaders import PyPDFLoader
 
 config = dotenv_values(f"{os.path.expanduser('~')}/.env")
 os.environ['OPENAI_API_KEY'] = config["OPENAI_API_KEY"]
@@ -24,7 +25,6 @@ def load_document(file):
     name, extension = os.path.splitext(file)
 
     if extension == '.pdf':
-        from langchain.document_loaders import PyPDFLoader
         print(f'Loading {file}')
         loader = PyPDFLoader(file)
     elif extension == '.docx':
